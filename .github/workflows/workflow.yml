@@ -1,15 +1,27 @@
 name: workflow
 
 on:
-  workflow_call:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Run Hello World
-        run: echo "Hello World "
+    - name: InfraConfig
+      uses: AlejandroJimenezGutierrez/HackatonActionMaster/.github/actions/infraconfig@main
+
+    - name: Build
+      run: echo "Building"
+
+    - name: Deploy
+      run: echo "Deploying"
+
+    - name: Test
+      uses: AlejandroJimenezGutierrez/HackatonActionMaster/.github/actions/tests@main
+      with:
+        param1: "valor1"
+        param2: "valor2"
